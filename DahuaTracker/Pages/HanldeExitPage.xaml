@@ -1,0 +1,86 @@
+﻿<Window
+    x:Class="DahuaTracker.Pages.HanldeExitPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DahuaTracker.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="HanldeExitPage"
+    MinWidth="800"
+    MinHeight="450"
+    AllowsTransparency="True"
+    Background="{StaticResource AttentionToActionBrush}"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    Topmost="True"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style BasedOn="{StaticResource MaterialDesignOutlinedButton}" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+    </Window.Resources>
+    <Grid
+        Width="800"
+        Height="450"
+        Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <FlowDocumentReader x:Name="BillReader" />
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="PrintBillBtn"
+                Grid.Column="0"
+                Click="PrintBillBtn_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="2" Kind="PrinterOutline" />
+                        <TextBlock Text="Chek chiqarish" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                x:Name="OpenBtn"
+                Grid.Column="1"
+                Click="OpenBtn_Click"
+                IsEnabled="False">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Margin="2" Kind="Barrier" />
+                        <TextBlock Text="Baryerni ochish" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                x:Name="CloseBtn"
+                Grid.Column="1"
+                Width="30"
+                Height="30"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                BorderThickness="0"
+                Click="CloseBtn_Click">
+                <md:PackIcon
+                    Width="30"
+                    Height="30"
+                    Kind="Close" />
+            </Button>
+            <Image
+                x:Name="TrafficImage"
+                Grid.ColumnSpan="2"
+                Width="350"
+                Height="350" />
+        </Grid>
+    </Grid>
+</Window>

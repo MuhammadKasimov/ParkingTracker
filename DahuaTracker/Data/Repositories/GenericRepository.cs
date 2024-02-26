@@ -28,7 +28,7 @@ namespace DahuaTracker.Data.Repositories
         public async Task SaveChangesAsync()
             => await dbContext.SaveChangesAsync();
 
-        public void Update(Expression<Func<TSource, bool>> expression, TSource entity)
+        public async void Update(Expression<Func<TSource, bool>> expression, TSource entity)
         {
             var existEntity = dbSet.FirstOrDefault(expression);
             if (existEntity != null)
@@ -38,6 +38,10 @@ namespace DahuaTracker.Data.Repositories
         }
         public TSource Get(Expression<Func<TSource, bool>> expression) =>
             dbSet.FirstOrDefault(expression);
-
+        public void Clear()
+        {
+            foreach (var entity in dbSet)
+                dbSet.Remove(entity);
+        }
     }
 }

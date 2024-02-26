@@ -93,8 +93,8 @@ namespace DahuaTracker.Pages
             {
                 view.Filter = null;
             }
-
-            EnterCountTxt.Text = dataItems.Count.ToString();
+            
+            EnterCountTxt.Text = EnterCountTxt.Text = view.Cast<object>().Count().ToString();
         }
 
         private void LoadByDate(DateTime startDateTime, DateTime endDateTime)
@@ -152,7 +152,7 @@ namespace DahuaTracker.Pages
                 dataItems.Add(infoView);
             }
 
-            EnterCountTxt.Text = dataItems.Count.ToString();
+            EnterCountTxt.Text = EnterCountTxt.Text = dataItems.Count.ToString();
         }
 
         private void EnterDataGrid_SelectionChanged(object sender, MouseButtonEventArgs e)
@@ -260,7 +260,7 @@ namespace DahuaTracker.Pages
 
                         return dataItem != null && dataItem.PlateNumber.Contains(SearchTxt.Text) && dataItem.Mode == mode;
                     };
-                    EnterCountTxt.Text = dataItems.Count.ToString();
+                    EnterCountTxt.Text = EnterCountTxt.Text = view.Cast<object>().Count().ToString();
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace DahuaTracker.Pages
 
                         return dataItem != null && dataItem.Mode == mode;
                     };
-                    EnterCountTxt.Text = dataItems.Count.ToString();
+                    EnterCountTxt.Text = EnterCountTxt.Text = view.Cast<object>().Count().ToString();
                 }
             }
         }

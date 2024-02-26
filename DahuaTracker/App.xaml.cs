@@ -12,7 +12,7 @@ namespace DahuaTracker
             this.DispatcherUnhandledException += (sender, args) =>
             {
                 Exception ex = args.Exception;
-
+                System.Windows.MessageBox.Show(ex.Message);
                 args.Handled = true; // Mark the exception as handled to prevent application termination
             };
         }

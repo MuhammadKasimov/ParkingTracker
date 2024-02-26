@@ -20,34 +20,31 @@ namespace DahuaTracker.Pages
 
         private async void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            CameraCredentials credentials = genericRepository.Get(c => c.Mode == Mode.Kirganlar);
+            genericRepository.Clear();
+            await genericRepository.SaveChangesAsync();
 
-            if (credentials == null)
-                credentials = new CameraCredentials();
+
+            CameraCredentials credentials = new CameraCredentials();
 
             credentials.Ip = IpTxt.Text;
             credentials.Port = PortTxt.Text;
             credentials.Login = UsernameTxt.Text;
             credentials.Password = PasswordTxt.Password;
-            genericRepository.Update(c => c.Mode == Mode.Chiqqanlar, credentials);
+            credentials.Mode = Mode.Kirganlar;
+            await genericRepository.AddAsync(credentials);
 
             await genericRepository.SaveChangesAsync();
 
             RequestReload?.Invoke(credentials, EventArgs.Empty);
-        }
 
-        private async void SaveLeaveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            CameraCredentials credentials = genericRepository.Get(c => c.Mode == Mode.Chiqqanlar);
-
-            if (credentials == null)
-                credentials = new CameraCredentials();
+            credentials = new CameraCredentials();
 
             credentials.Ip = IpLeaveTxt.Text;
             credentials.Port = PortLeaveTxt.Text;
             credentials.Login = UsernameLeaveTxt.Text;
             credentials.Password = PasswordLeaveTxt.Password;
-            genericRepository.Update(c => c.Mode == Mode.Chiqqanlar, credentials);
+            credentials.Mode = Mode.Chiqqanlar;
+            await genericRepository.AddAsync(credentials);
 
             await genericRepository.SaveChangesAsync();
             RequestReload?.Invoke(credentials, EventArgs.Empty);

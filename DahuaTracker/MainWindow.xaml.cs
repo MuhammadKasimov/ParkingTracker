@@ -72,12 +72,16 @@ namespace DahuaTracker
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var data = genericRepository.GetAll(ei =>
-                ei.Time.Date == DateTime.Now.Date && ei.Mode == Mode.Kirganlar).ToList();
+                ei.Time.Date == DateTime.Now.Date && ei.Mode == Mode.Kirganlar)
+                .OrderByDescending(ei => ei.Time)
+                .ToList();
 
             int enteredCars = data.Count;
             EnteredCarsTxt.Text = enteredCars.ToString();
             var dataLeaved = genericRepository.GetAll(ei =>
-                ei.Time.Date == DateTime.Now.Date && ei.Mode == Mode.Chiqqanlar).ToList();
+                ei.Time.Date == DateTime.Now.Date && ei.Mode == Mode.Chiqqanlar)
+                .OrderByDescending(ei => ei.Time)
+                .ToList();
             LeavedCarsTxt.Text = dataLeaved.Count.ToString();
 
             foreach (var item in data)
@@ -297,7 +301,7 @@ namespace DahuaTracker
                 m_RealPlayID = NETClient.RealPlay(m_LoginID, 0, EnterRealTimeCam.Handle);
                 if (IntPtr.Zero == m_RealPlayID)
                 {
-                    //System.Windows.MessageBox.Show(this, NETClient.GetLastError());
+                    System.Windows.MessageBox.Show(this, NETClient.GetLastError());
                     return;
                 }
             }
@@ -306,7 +310,7 @@ namespace DahuaTracker
                 bool ret = NETClient.StopRealPlay(m_RealPlayID);
                 if (!ret)
                 {
-                    //System.Windows.MessageBox.Show(this, NETClient.GetLastError());
+                    System.Windows.MessageBox.Show(this, NETClient.GetLastError());
                     return;
                 }
                 m_RealPlayID = IntPtr.Zero;
@@ -320,7 +324,7 @@ namespace DahuaTracker
                 m_LeavedRealPlayID = NETClient.RealPlay(m_LeavedLoginID, 0, LeaveRealTimeCam.Handle); ;
                 if (IntPtr.Zero == m_LeavedRealPlayID)
                 {
-                    //System.Windows.MessageBox.Show(this, NETClient.GetLastError());
+                    System.Windows.MessageBox.Show(this, NETClient.GetLastError());
                     return;
                 }
             }
@@ -329,7 +333,7 @@ namespace DahuaTracker
                 bool ret = NETClient.StopRealPlay(m_LeavedRealPlayID);
                 if (!ret)
                 {
-                    //System.Windows.MessageBox.Show(this, NETClient.GetLastError());
+                    System.Windows.MessageBox.Show(this, NETClient.GetLastError());
                     return;
                 }
                 m_LeavedRealPlayID = IntPtr.Zero;
@@ -558,18 +562,41 @@ namespace DahuaTracker
             {
                 if (credentials.Mode == Mode.Kirganlar)
                 {
-                    NETClient.StopRealPlay(m_RealPlayID);
-                    NETClient.Logout(m_LoginID);
-                    m_LoginID = IntPtr.Zero;
-                    m_RealPlayID = IntPtr.Zero;
+                    if (m_EventID != IntPtr.Zero)
+                    {
+                        NETClient.StopLoadPic(m_EventID);
+                        m_EventID = IntPtr.Zero;
+                    }
+                    if (m_RealPlayID != IntPtr.Zero)
+                    {
+                        NETClient.StopRealPlay(m_RealPlayID);
+                        m_RealPlayID = IntPtr.Zero;
+                    }
+                    if (m_LoginID != IntPtr.Zero)
+                    {
+                        NETClient.Logout(m_LoginID);
+                        m_LoginID = IntPtr.Zero;
+                    }
+
                     LoginBtn_Click(credentials);
                 }
                 else
                 {
-                    NETClient.StopRealPlay(m_LeavedRealPlayID);
-                    NETClient.Logout(m_LeavedLoginID);
-                    m_LeavedLoginID = IntPtr.Zero;
-                    m_LeavedRealPlayID = IntPtr.Zero;
+                    if (m_LeavedEventID != IntPtr.Zero)
+                    {
+                        NETClient.StopLoadPic(m_LeavedEventID);
+                        m_LeavedEventID = IntPtr.Zero;
+                    }
+                    if (m_LeavedRealPlayID != IntPtr.Zero)
+                    {
+                        NETClient.StopRealPlay(m_LeavedRealPlayID);
+                        m_LeavedRealPlayID = IntPtr.Zero;
+                    }
+                    if (m_LeavedLoginID != IntPtr.Zero)
+                    {
+                        NETClient.Logout(m_LeavedLoginID);
+                        m_LeavedLoginID = IntPtr.Zero;
+                    }
                     LoginLeaveBtn_Click(credentials);
                 }
             }

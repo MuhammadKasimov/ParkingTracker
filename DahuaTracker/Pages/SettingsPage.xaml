@@ -75,18 +75,11 @@
             <TextBox
                 x:Name="UsernameTxt"
                 Grid.Column="2"
-                md:HintAssist.Hint="Username"
-                Text="admin" />
+                md:HintAssist.Hint="Username" />
             <PasswordBox
                 x:Name="PasswordTxt"
                 Grid.Column="3"
                 md:HintAssist.Hint="Password" />
-            <Button
-                x:Name="SaveBtn"
-                Grid.Column="4"
-                Height="45"
-                Click="SaveBtn_Click"
-                Content="Saqlash" />
         </Grid>
         <Grid Grid.Row="1" Margin="1">
             <Grid.ColumnDefinitions>
@@ -116,12 +109,6 @@
                 x:Name="PasswordLeaveTxt"
                 Grid.Column="3"
                 md:HintAssist.Hint="Password" />
-            <Button
-                x:Name="SaveLeaveBtn"
-                Grid.Column="4"
-                Height="45"
-                Click="SaveLeaveBtn_Click"
-                Content="Saqlash" />
         </Grid>
         <Button
             Width="30"
@@ -138,5 +125,14 @@
                 Height="30"
                 Kind="Close" />
         </Button>
+        <Button
+            x:Name="SaveBtn"
+            Grid.RowSpan="2"
+            Width="100"
+            Height="45"
+            Margin="10"
+            HorizontalAlignment="Right"
+            Click="SaveBtn_Click"
+            Content="Saqlash" />
     </Grid>
 </Window>

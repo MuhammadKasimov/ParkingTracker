@@ -10,5 +10,6 @@ namespace DahuaTracker.Data.IRepositories
         Task SaveChangesAsync();
         void Update(Expression<Func<TSource, bool>> expression, TSource entity);
         TSource Get(Expression<Func<TSource, bool>> expression);
+        public void Clear();
     }
 }

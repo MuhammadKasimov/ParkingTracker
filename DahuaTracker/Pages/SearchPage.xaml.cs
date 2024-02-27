@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -163,7 +164,9 @@ namespace DahuaTracker.Pages
             {
                 // Get the selected item
                 InfoView selectedItem = (InfoView)datagrid.SelectedItem;
-
+                string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+                string directoryName = Path.GetDirectoryName(assemblyLocation);
+                var fileName = Path.Combine(directoryName, selectedItem.FileName);
                 if (selectedItem != null)
                 {
                     InfoPage infoPage = new InfoPage();
@@ -174,9 +177,9 @@ namespace DahuaTracker.Pages
                     infoPage.VehicleColorTxt.Text += selectedItem.VehicleColor;
                     infoPage.VehicleSizeTxt.Text += selectedItem.VehicleSize;
                     infoPage.VehicleTypeTxt.Text += selectedItem.VehicleType;
-                    if (File.Exists(selectedItem.FileName))
+                    if (File.Exists(fileName))
                     {
-                        FileInfo file = new FileInfo(selectedItem.FileName);
+                        FileInfo file = new FileInfo(fileName);
                         infoPage.InfoImage.Source = new BitmapImage(new Uri(file.FullName, UriKind.Absolute));
                     }
                     infoPage.ShowDialog();

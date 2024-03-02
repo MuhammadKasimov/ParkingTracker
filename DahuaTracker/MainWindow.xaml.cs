@@ -270,7 +270,7 @@ namespace DahuaTracker
                 m_LeavedLoginID = NETClient.LoginWithHighLevelSecurity(credentials.Ip,
                 port, credentials.Login, credentials.Password,
                     EM_LOGIN_SPAC_CAP_TYPE.TCP, IntPtr.Zero, ref m_LeavedDeviceInfo);
-                if (m_DeviceInfo.sSerialNumber != "8K0B19BPAJ00005" && m_DeviceInfo.sSerialNumber != "8K0B19BPAJ00009")
+                if (m_LeavedDeviceInfo.sSerialNumber != "8K0B19BPAJ00005" && m_LeavedDeviceInfo.sSerialNumber != "8K0B19BPAJ00009")
                 {
                     System.Windows.MessageBox.Show("Seriya raqami xato");
                     return;

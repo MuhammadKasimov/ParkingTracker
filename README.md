@@ -9,7 +9,7 @@ Welcome to the Car Parking Management System repository! This project aims to pr
 - **Receipt Generation**: Generates a receipt for each vehicle based on the duration of stay and a constant price per hour.
 - **User-friendly Interface**: Provides an intuitive interface.
 
-# Night time Camera Issue
+## Night time Camera Issue
 One significant challenge faced by our system is the nighttime camera issue, particularly when lighting conditions change and nearby standing cars affect tracking. Here are some strategies to address this issue:
 
 - Proper Lighting: Ensure proper lighting around the parking area for consistent image quality. Adequate lighting can help improve the camera's performance, especially during nighttime operations.

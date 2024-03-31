@@ -9,6 +9,9 @@ Welcome to the Car Parking Management System repository! This project aims to pr
 - **Receipt Generation**: Generates a receipt for each vehicle based on the duration of stay and a constant price per hour.
 - **User-friendly Interface**: Provides an intuitive interface.
 
+## Dahua SDK Integration
+This project utilizes the Dahua SDK for implementing various functionalities related to video surveillance and analysis. Dahua provides a range of tracking SDKs, including those for traffic analysis, face recognition, and more.
+
 ## Night time Camera Issue
 One significant challenge faced by our system is the nighttime camera issue, particularly when lighting conditions change and nearby standing cars affect tracking. Here are some strategies to address this issue:
 
